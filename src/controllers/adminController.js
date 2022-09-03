@@ -60,6 +60,13 @@ module.exports = {
             /* Redirecciona al detalle del producto recien creado */
             /* res.redirect(`/products/detail/${productoNuevo.id}`) */
         } else {
+            let ruta = (dato) => fs.existsSync(path.join(__dirname, '..', '..', 'public', 'images', 'productos', dato))
+
+            req.files.forEach(imagen => {
+                if (ruta(imagen) && (imagen !== "default-image.png")) {
+                    fs.unlinkSync(path.join(__dirname, '..', '..', 'public', 'images', 'productos', imagen))
+                }
+            })
             /* return res.send(errors.mapped()) */
             return res.render('admin/crearProducto', {
                 errors: errors.mapped(),
@@ -140,6 +147,8 @@ module.exports = {
         let productoParaRestaurar = historial.find((elemento) => {
             return elemento.id == idParams
         })
+        let lastId = productos[productos.length - 1].id + 1
+        productoParaRestaurar.id = lastId
 
         productos.push(productoParaRestaurar)
         guardar(productos)

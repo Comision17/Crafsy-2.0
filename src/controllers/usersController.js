@@ -3,6 +3,7 @@ const path = require('path')
 const { validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
 const usuarios = require('../data/users.json')
+const { emitWarning } = require('process')
 const guardar = (dato) => fs.writeFileSync(path.join(__dirname, '../data/users.json')
     , JSON.stringify(dato, null, 4), 'utf-8')
 
@@ -37,6 +38,12 @@ module.exports = {
 
             return res.redirect('/')
         } else {
+
+            let ruta = (dato) => fs.existsSync(path.join(__dirname, '..', '..', 'public', 'images', 'users', dato))
+            if (ruta(req.file.filename) && (req.file.filename !== "default-image.png")) {
+                fs.unlinkSync(path.join(__dirname, '..', '..', 'public', 'images', 'users', req.file.filename))
+            }
+            
             /* return res.send(errors.mapped()) */
             return res.render('users/register', {
                 errors: errors.mapped(),
@@ -48,10 +55,11 @@ module.exports = {
         return res.render('users/login')
     },
     processLogin:(req,res) => {
+
         let errors = validationResult(req)
         if (errors.isEmpty()) {
-
-            const {email} = req.body
+        
+            const {email,recordarme} = req.body
             let usuario = usuarios.find(user => user.email === email)
 
             req.session.userLogin = {
@@ -59,6 +67,9 @@ module.exports = {
                 nombre : usuario.name,
                 image : usuario.image,
                 rol : usuario.rol
+            }
+            if(recordarme){
+                res.cookie('Crafsy',req.session.userLogin,{maxAge: 1000 * 60 * 60 * 24})
             }
 
             return res.redirect('/users/profile')
@@ -75,7 +86,12 @@ module.exports = {
         return res.render('users/profile')
     },
     logout : (req,res) => {
+
         req.session.destroy();
+        if(req.cookies.Crafsy){
+            res.cookie('Crafsy','',{maxAge: -1})
+        }
         return res.redirect('/')
+        
     }
 }

@@ -2,19 +2,20 @@ const {list,create,edit,store,update,destroy,history,restore,crash,create2} = re
 const express = require('express');
 const router = express.Router();
 const upload = require('../middlewares/multerProducts')
+const adminCheck = require('../middlewares/adminCheck')
 const productValidator = require('../validations/productsValidation')
 
 /* GET home page. */
-router.get('/list', list);
-router.get('/history', history);
+router.get('/list',adminCheck, list);
+router.get('/history',adminCheck, history);
 
 /* Creando un producto */
-router.get('/create', create);
-router.get('/create2', create2);
-router.post('/create',upload.array('imagen'),productValidator,store);
+router.get('/create',adminCheck, create);
+router.get('/create2',adminCheck, create2);
+router.post('/create',adminCheck,upload.array('imagen'),productValidator,store);
 
 /* Editando un producto */
-router.get('/edit/:id', edit);
+router.get('/edit/:id',adminCheck, edit);
 router.put('/edit/:id',upload.array('imagenes'),productValidator, update);
 
 /* Eliminando un producto */

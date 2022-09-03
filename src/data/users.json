@@ -13,7 +13,7 @@
         "id": 2,
         "name": "cristian",
         "email": "cris@gmail.com",
-        "pass": "12345678",
+        "pass": "$2a$10$Q4zq5aCrPr/iXHk2GFkz2uhOQMtOuXJm7ADira4klRQ/oiyNEWtFK",
         "pais": "argentina",
         "genero": "M",
         "image": "profile.png",
@@ -38,5 +38,15 @@
         "genero": "M",
         "image": "avatar-1661781452319.png",
         "rol": "usuario"
+    },
+    {
+        "id": 5,
+        "name": "Alcachofa",
+        "email": "alcachofa@gmail.com",
+        "pass": "$2a$12$qrl7eu2fQtHHhx5oLklpeu1HYSy3ksbjuB6osOZfnA.86QVCPlMBe",
+        "pais": "brasil",
+        "genero": "SN",
+        "image": "avatar-1662038672171.webp",
+        "rol": "admin"
     }
 ]

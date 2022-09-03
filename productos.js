@@ -1,11 +1,11 @@
 const fs = require('fs')
-let productos = require('./productos.json');
+let productos = require('./src/data/productos.json');
 
 let ultimoId = productos[productos.length - 1].id + 1
 
 console.log(ultimoId);
 /* Creamos un nuevo producto */
-let nuevoProducto = {
+/* let nuevoProducto = {
     id: 7,
     marca: "Nokia",
     titulo: "Nokia 1100 un telefonazo y antirrobo",
@@ -19,7 +19,7 @@ let nuevoProducto = {
         "Nokia 1100 extra.webp",
         "Nokia 1100 negro.jpg"
     ]
-}
+} */
 
 /* productos.push(nuevoProducto);
 console.log(productos); */
@@ -31,7 +31,7 @@ console.log(productos); */
 
 
 /* Editar producto */
-let ProduEdit = productos.map((element,index) => {
+/* let ProduEdit = productos.map((element,index) => {
     if (element.id === 6) {
         element.marca = "Iphone"
         element.titulo = "Iphone 13 pro max plus extra super ultra violeta"
@@ -39,7 +39,7 @@ let ProduEdit = productos.map((element,index) => {
         element.stock = 3
     }
     return element
-})
+}) */
 
 /* console.log(ProduEdit); */
 
@@ -50,7 +50,7 @@ let ProduEdit = productos.map((element,index) => {
 
 
 /* Eliminar un producto */
-let eliminarProducto = productos.filter(element => element.id !== 4)
+/* let eliminarProducto = productos.filter(element => element.id !== 4) */
 
 
 
