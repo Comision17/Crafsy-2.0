@@ -7,17 +7,25 @@
         </div>
     </div>
     <div class="burger">
-        <input type="checkbox" name="burger" id="burger" checked>
-        <label for="burger"><i class="fas fa-ellipsis-v"></i></label>
+        <input type="checkbox" name="burger" id="burger" class="burger-menu" checked>
+        <label for="burger" class="burger-label"><i class="fas fa-ellipsis-v"></i></label>
         <nav>
-            <ul class="menu">
-                <li><a href="/products/Smartphones">Smartphones</a></li>
-                <li><a href="/products/Tablets">Tablets</a></li>
-                <li><a href="/products/Notebooks">Notebooks</a></li>
-                <% if (locals.userLogin && locals.userLogin.rol === "admin") { %>
-                    <li><a href="/admin/list">Admin</a></li>
-                <% } %>
-            </ul>
+            <div class="center">
+                <div class="form-search">
+                    <form action="/busqueda" method="get">
+                        <input type="text" name="search" id="search" class="barraDeBusqueda" placeholder="Busca tu producto aca ">
+                        <button type="submit" class="lupa"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                <ul class="menu">
+                    <li><a href="/products/Smartphones">Smartphones</a></li>
+                    <li><a href="/products/Tablets">Tablets</a></li>
+                    <li><a href="/products/Notebooks">Notebooks</a></li>
+                    <% if (locals.userLogin && locals.userLogin.rol === "admin") { %>
+                        <li><a href="/admin/list">Admin</a></li>
+                    <% } %>
+                </ul>
+            </div>
             <ul class="user">
                 <li><a href="/products/cart"><i class="fas fa-shopping-cart"></i></a></li>
                 <% if (locals.userLogin) { %>
@@ -26,7 +34,6 @@
                     <li><a href="/users/login">Login</a></li>
                     <li><a href="/users/register">Registro</a></li>
                 <% } %>
-
             </ul>
         </nav>
     </div>
